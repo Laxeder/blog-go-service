@@ -1,14 +1,12 @@
 package routes
 
-import (
-	"net/http"
-)
+import "github.com/gofiber/fiber/v2"
 
-func Routes() *http.ServeMux {
-	mux := &http.ServeMux{}
+func ApiV1(app *fiber.App) {
+	router := app.Group("/api/v1")
 
-	mux.HandleFunc("/hello", Hello)
-	mux.HandleFunc("/", NotFound)
+	router.Get("/health", Health)
+	router.Get("/hello", Hello)
 
-	return mux
+	app.Use("/", NotFound)
 }

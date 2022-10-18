@@ -1,10 +1,9 @@
 package routes
 
-import (
-	"fmt"
-	"net/http"
-)
+import "github.com/gofiber/fiber/v2"
 
-func Hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+func Hello(c *fiber.Ctx) error {
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Hello World!",
+	})
 }
