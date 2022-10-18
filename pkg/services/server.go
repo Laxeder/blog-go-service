@@ -1,16 +1,28 @@
 package services
 
 import (
-	"blog/pkg/routes"
-	"net/http"
+	"github.com/gofiber/fiber/v2"
 )
 
-func Server() http.Server {
-	routes := routes.Routes()
+type Server struct {
+	app *fiber.App
+}
 
-	srv := http.Server{
-		Handler: routes,
-	}
+func (srv *Server) New() *fiber.App {
+	srv.app = fiber.New()
+	return srv.app
+}
 
-	return srv
+func (srv *Server) Listen(address string) error {
+	return srv.app.Listen(address)
+}
+
+func (srv *Server) Routes(routes func(*fiber.App)) *fiber.App {
+	defer routes(srv.app)
+	return srv.app
+}
+
+func (srv *Server) Middlewares(middlewares func(*fiber.App)) *fiber.App {
+	defer middlewares(srv.app)
+	return srv.app
 }
