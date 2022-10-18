@@ -2,20 +2,19 @@ package main
 
 import (
 	"blog/pkg/configs"
+	"blog/pkg/routes"
 	"blog/pkg/services"
 	"fmt"
 )
 
 func main() {
-	// Carrega as configurações da API
 	configs.Load()
-	PORT := configs.GetAPIPort()
 
-	// Inicia um novo servidor
-	srv := services.Server()
-	srv.Addr = PORT
+	srv := &services.Server{}
+	srv.New()
+	srv.Routes(routes.ApiV1)
 
-	err := srv.ListenAndServe()
+	err := srv.Listen(configs.GetAPIPort())
 
 	if err != nil {
 		fmt.Printf("Erro ao subir servidor: %v", err)
