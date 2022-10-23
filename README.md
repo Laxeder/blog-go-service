@@ -1,2 +1,2 @@
-# blog-laxe-back
-Um simples de blog em GO.
+# blog-go-service
+Um simples blog em GO.
