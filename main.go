@@ -17,6 +17,6 @@ func main() {
 	err := srv.Listen(configs.GetAPIPort())
 
 	if err != nil {
-		fmt.Printf("Erro ao subir servidor: %v", err)
+		fmt.Printf("Server down. Error: %v", err)
 	}
 }
