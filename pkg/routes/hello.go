@@ -1,9 +1,11 @@
 package routes
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"blog/pkg/modules/response"
 
-func Hello(c *fiber.Ctx) error {
-	return c.Status(fiber.StatusOK).JSON(fiber.Map{
-		"message": "Hello World!",
-	})
+	"github.com/gofiber/fiber/v2"
+)
+
+func Hello(ctx *fiber.Ctx) error {
+	return response.New(ctx).Json(response.Success(200, "Hello World!"))
 }

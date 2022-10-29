@@ -1,9 +1,11 @@
 package routes
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"blog/pkg/modules/response"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 func NotFound(ctx *fiber.Ctx) error {
-	return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{
-		"message": "Recurso não encontrado",
-	})
+	return response.New(ctx).Json(response.Error(404, "BGS001", "Recurso não encontrado."))
 }
